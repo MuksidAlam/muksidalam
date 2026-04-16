@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alvi | Developer Portfolio</title>
+  <meta name="description" content="Modern dark-themed developer portfolio for GitHub Pages." />
+  <style>
+    :root {
+      --bg: #070b16;
+      --bg-soft: rgba(255,255,255,0.06);
+      --card: rgba(15, 23, 42, 0.75);
+      --border: rgba(255,255,255,0.12);
+      --text: #e5eefc;
+      --muted: #9fb0d0;
+      --accent: #7c3aed;
+      --accent-2: #06b6d4;
+      --accent-3: #3b82f6;
+      --success: #22c55e;
+      --shadow: 0 20px 60px rgba(0,0,0,0.35);
+      --radius: 22px;
+      --max-width: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(124,58,237,0.22), transparent 28%),
+        radial-gradient(circle at top right, rgba(6,182,212,0.16), transparent 25%),
+        radial-gradient(circle at bottom center, rgba(59,130,246,0.18), transparent 30%),
+        linear-gradient(180deg, #050816 0%, #08101f 40%, #050814 100%);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(calc(100% - 2rem), var(--max-width));
+      margin: 0 auto;
+    }
+
+    .nav-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(18px);
+      background: rgba(5, 8, 22, 0.66);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-badge {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 10px 30px rgba(124,58,237,0.35);
+      font-weight: 800;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .nav-links a {
+      padding: 0.7rem 1rem;
+      border-radius: 999px;
+      color: var(--muted);
+      transition: 0.2s ease;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: white;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .hero {
+      padding: 5.4rem 0 2rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 0.9fr;
+      gap: 1.6rem;
+      align-items: stretch;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+
+    .hero-card {
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: auto -20% -35% auto;
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, rgba(124,58,237,0.45), transparent 65%);
+      filter: blur(20px);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.5rem 0.85rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #cdd9f6;
+      font-size: 0.92rem;
+      margin-bottom: 1rem;
+    }
+
+    h1, h2, h3 { margin: 0 0 0.8rem; line-height: 1.15; }
+    h1 {
+      font-size: clamp(2.4rem, 5vw, 4.8rem);
+      max-width: 12ch;
+      letter-spacing: -0.04em;
+    }
+    h2 {
+      font-size: clamp(1.55rem, 3vw, 2.2rem);
+      letter-spacing: -0.03em;
+    }
+    h3 {
+      font-size: 1.1rem;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #fff, #a5b4fc, #67e8f9);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 1.06rem;
+      max-width: 60ch;
+    }
+
+    .hero-actions {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 0.95rem 1.2rem;
+      border-radius: 14px;
+      font-weight: 600;
+      border: 1px solid transparent;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: white;
+      box-shadow: 0 14px 30px rgba(124,58,237,0.28);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.1);
+      color: var(--text);
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .hero-side {
+      padding: 1.4rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .profile-panel {
+      padding: 1.2rem;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.025));
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .avatar {
+      width: 82px;
+      height: 82px;
+      border-radius: 22px;
+      display: grid;
+      place-items: center;
+      font-size: 1.9rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, rgba(124,58,237,0.9), rgba(6,182,212,0.9));
+      margin-bottom: 1rem;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.8rem;
+    }
+
+    .mini-stat {
+      padding: 1rem;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .mini-stat strong {
+      display: block;
+      font-size: 1.15rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .section {
+      padding: 1.1rem 0 1.1rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .section-header p { color: var(--muted); margin: 0; max-width: 60ch; }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .info-card,
+    .project-card,
+    .timeline-card,
+    .contact-card {
+      padding: 1.3rem;
+    }
+
+    .chip-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-top: 1rem;
+    }
+
+    .chip {
+      padding: 0.58rem 0.82rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      color: #d9e3f7;
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.92rem;
+    }
+
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      min-height: 100%;
+    }
+
+    .project-image {
+      aspect-ratio: 16/10;
+      border-radius: 18px;
+      background:
+        linear-gradient(135deg, rgba(124,58,237,0.28), rgba(6,182,212,0.16)),
+        rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      display: grid;
+      place-items: center;
+      color: #dbeafe;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .project-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: auto;
+    }
+
+    .text-muted { color: var(--muted); }
+    .list {
+      margin: 0;
+      padding-left: 1.1rem;
+      color: var(--muted);
+    }
+    .list li + li { margin-top: 0.45rem; }
+
+    .timeline {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 1.2rem;
+      border-left: 2px solid rgba(255,255,255,0.1);
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -7px;
+      top: 0.2rem;
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 0 6px rgba(124,58,237,0.12);
+    }
+
+    .timeline-item small {
+      color: #9ccaf4;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .resume-box {
+      padding: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .resume-actions {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-card {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .contact-item {
+      padding: 0.95rem 1rem;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    footer {
+      padding: 2rem 0 3rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: 0.65s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .grid-3,
+      .grid-2,
+      .contact-card {
+        grid-template-columns: 1fr;
+      }
+
+      .section-header {
+        align-items: start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .navbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .brand { justify-content: center; }
+      .nav-links { justify-content: center; }
+      .hero { padding-top: 3.4rem; }
+      .hero-card, .hero-side, .info-card, .project-card, .timeline-card, .resume-box, .contact-card { padding: 1rem; }
+      .mini-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="nav-wrap">
+    <div class="container navbar">
+      <a href="#home" class="brand">
+        <span class="brand-badge">A</span>
+        <span>Alvi</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#about">Profile</a>
+        <a href="#resume">Resume</a>
+        <a href="#projects">Work Samples</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </div>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="container hero-grid">
+        <div class="card hero-card reveal">
+          <span class="eyebrow">Personal Portfolio Website</span>
+          <h1>Building <span class="gradient-text">modern digital experiences</span> with clean code and clear design.</h1>
+          <p class="lead">
+            I’m Al Muksid Alam Alvi, a developer focused on building structured, efficient, and real-world software solutions. With strong foundations in SQL, database design, Python, and Java, I create systems that are reliable, optimized, and user-focused. This portfolio highlights my professional profile, technical skills, and project experience.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">View Projects</a>
+            <a class="btn btn-secondary" href="#contact">Contact Me</a>
+          </div>
+        </div>
+
+        <div class="card hero-side reveal">
+          <div class="profile-panel">
+            <div class="avatar">A</div>
+            <h3>Developer Profile</h3>
+            <p class="text-muted">Computer Programming student with interest in SQL, database design, Python, Java, and practical software solutions.</p>
+          </div>
+
+          <div class="mini-grid">
+            <div class="mini-stat">
+              <strong>Java</strong>
+              <span class="text-muted">OOP and application logic</span>
+            </div>
+            <div class="mini-stat">
+              <strong>Python</strong>
+              <span class="text-muted">Scripting and projects</span>
+            </div>
+            <div class="mini-stat">
+              <strong>SQL</strong>
+              <span class="text-muted">Queries and relational design</span>
+            </div>
+            <div class="mini-stat">
+              <strong>GitHub</strong>
+              <span class="text-muted">Version control workflow</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <h2>Profile</h2>
+            <p>A clean professional introduction that matches a technology-focused portfolio.</p>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card info-card reveal">
+            <h3>About Me</h3>
+            <p class="text-muted">
+              I am a Computer Programming student with a strong focus on database administration, system performance, and software development. I have hands-on experience working with SQL, relational database design, Python, and Java, and I enjoy building structured and efficient technical solutions.
+            </p>
+            <p class="text-muted">
+              In addition to my academic work, I am the founder of <strong>Skill Station</strong>, a platform aimed at helping individuals develop real-world skills and improve career opportunities. This experience has strengthened my ability to think beyond code and focus on practical impact, scalability, and user needs.
+            </p>
+            <p class="text-muted">
+              I bring strong problem-solving ability, adaptability, and teamwork skills developed through both technical projects and professional experience. I am currently seeking opportunities in database administration or software development where I can contribute, learn, and grow in a professional environment.
+            </p>
+
+          <div class="card info-card reveal">
+            <h3>Core Skills</h3>
+            <div class="chip-wrap">
+              <span class="chip">Java</span>
+              <span class="chip">Python</span>
+              <span class="chip">HTML</span>
+              <span class="chip">CSS</span>
+              <span class="chip">JavaScript</span>
+              <span class="chip">SQL</span>
+              <span class="chip">Git & GitHub</span>
+              <span class="chip">SQLite</span>
+              <span class="chip">Query Optimization</span>
+              <span class="chip">Problem Solving</span>
+              <span class="chip">Debugging</span>
+              <span class="chip">System Troubleshooting</span>
+              <span class="chip">Communication</span>
+              <span class="chip">Teamwork</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="resume" class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <h2>Resume & Skills</h2>
+            <p>A quick overview of what I bring.</p>
+          </div>
+        </div>
+
+        <div class="card resume-box reveal">
+          <h3>Professional Snapshot</h3>
+          <ul class="list">
+            <li>Computer Programming student specializing in SQL, database design, and backend-focused problem solving.</li>
+            <li>Experience with Python, Java, SQLite, and GitHub for building and managing technical projects.</li>
+            <li>Strong understanding of database administration concepts including data integrity, query optimization, and system troubleshooting.</li>
+            <li>Founder of Skill Station, demonstrating initiative, leadership, and real-world application of technology.</li>
+            <li>Proven ability to work in fast-paced environments with strong communication and teamwork skills.</li>
+          </ul>
+
+          <div class="resume-actions">
+            <a class="btn btn-primary" href="resume.pdf" target="_blank">Open Resume PDF</a>
+            <a class="btn btn-secondary" href="https://skill-station.com" target="_blank" rel="noreferrer">Personal Website</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <h2>Work Samples</h2>
+            <p>Showcase your best technical work here. Replace the placeholders below with your real projects and GitHub links.</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <article class="card project-card reveal">
+            <div class="project-image">PROJECT 01</div>
+            <div>
+              <h3>Port Scanner with Python</h3>
+              <p class="text-muted">Developed a multi-threaded port scanner using Python and socket programming, with SQLite-based data storage and performance-focused debugging.</p>
+            </div>
+            <div class="chip-wrap">
+              <span class="chip">Python</span>
+              <span class="chip">Sockets</span>
+              <span class="chip">SQLite</span>
+            </div>
+            <div class="project-links">
+              <a class="btn btn-primary" href="https://github.com/MuksidAlam/COMP2152_Assignment-2">GitHub Repo</a>
+            </div>
+          </article>
+
+          <article class="card project-card reveal">
+            <div class="project-image">PROJECT 02</div>
+            <div>
+              <h3>Database Management Project</h3>
+              <p class="text-muted">Designed and implemented a relational database with a normalized schema, complex SQL queries, data validation, and integrity-focused structure.</p>
+            </div>
+            <div class="chip-wrap">
+              <span class="chip">SQL</span>
+              <span class="chip">Relational Design</span>
+              <span class="chip">Data Integrity</span>
+            </div>
+            <div class="project-links">
+              <a class="btn btn-secondary" href="#">Live Demo</a>
+              <a class="btn btn-primary" href="#">GitHub Repo</a>
+            </div>
+          </article>
+
+          <article class="card project-card reveal">
+            <div class="project-image">PROJECT 03</div>
+            <div>
+              <h3>Technical & Team Experience</h3>
+              <p class="text-muted">Built through coursework and real-world work experience, combining technical problem-solving with communication, teamwork, and fast-paced execution.</p>
+            </div>
+            <div class="chip-wrap">
+              <span class="chip">Problem Solving</span>
+              <span class="chip">Team Collaboration</span>
+              <span class="chip">Troubleshooting</span>
+            </div>
+            <div class="project-links">
+              <a class="btn btn-secondary" href="#">Case Study</a>
+              <a class="btn btn-primary" href="#">GitHub Repo</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="education" class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <h2>Education & Acknowledgements</h2>
+            
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card timeline-card reveal">
+            <h3>Education Timeline</h3>
+            <div class="timeline">
+              <div class="timeline-item">
+                <small>2025 – Present</small>
+                <strong>Computer Programming Diploma</strong>
+                <p class="text-muted">George Brown College, Toronto, ON. Relevant coursework includes Database Systems, Object-Oriented Programming, Data Structures &amp; Algorithms, and Systems Analysis.</p>
+              </div>
+              <div class="timeline-item">
+                <small>Professional Experience</small>
+                <strong>Founder - Skillstation Ltd.</strong>
+                <p class="text-muted">Toronto, ON • 2021 – Present. Developed leadership skills, product development, communication, teamwork, time management, and problem-solving skills in a fast-paced environment.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card timeline-card reveal">
+            <h3>Documents & Recognition</h3>
+            <ul class="list">
+              <li>Unofficial Transcript PDF</li>
+              <li>Computer Programming diploma documents</li>
+              <li>Relevant academic certificates</li>
+              <li>Volunteer experience: Canadian Red Cross fundraiser support</li>
+              <li>Any recommendation letters or added achievements</li>
+            </ul>
+            <div class="hero-actions" style="margin-top:1rem;">
+              <a class="btn btn-secondary" href="#">View Transcript</a>
+              <a class="btn btn-secondary" href="#">View Certificates</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <h2>Contact</h2>
+            <p>Feel free to reach out to me.</p>
+          </div>
+        </div>
+
+        <div class="card contact-card reveal">
+          <div>
+            <h3>Let’s Connect</h3>
+            <p class="text-muted">I’m open to internship, entry-level, and project opportunities where I can contribute, learn, and grow as a developer.</p>
+          </div>
+
+          <div class="contact-list">
+            <div class="contact-item"><strong>Email:</strong> almuksidalvi@gmail.com</div>
+            <div class="contact-item"><strong>Phone:</strong> +1 437 268 4200</div>
+            <div class="contact-item"><strong>GitHub:</strong> github.com/MuksidAlam</div>
+            <div class="contact-item"><strong>LinkedIn:</strong> linkedin.com/in/almuksidalvi</div>
+            <div class="contact-item"><strong>Startup:</strong> skill-station.com</div>
+            <div class="contact-item"><strong>Location:</strong> Toronto, Ontario</div>
+            <div class="contact-item"><strong>Website:</strong> www.skill-station.com</div>
+            <div class="contact-item"><strong>Location:</strong> Toronto, Ontario</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+       © Designed and developed by Al Muksid Alam Alvi 
+    </div>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const sections = document.querySelectorAll('section[id]');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.12 });
+
+    reveals.forEach((el) => revealObserver.observe(el));
+
+    const setActiveLink = () => {
+      let current = 'home';
+      sections.forEach((section) => {
+        const top = window.scrollY;
+        const offset = section.offsetTop - 120;
+        const height = section.offsetHeight;
+        if (top >= offset && top < offset + height) current = section.id;
+      });
+
+      navLinks.forEach((link) => {
+        link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
+      });
+    };
+
+    window.addEventListener('scroll', setActiveLink);
+    window.addEventListener('load', setActiveLink);
+  </script>
+</body>
+</html>
